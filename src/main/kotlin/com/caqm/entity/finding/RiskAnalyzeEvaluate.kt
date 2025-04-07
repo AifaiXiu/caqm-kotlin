@@ -3,20 +3,43 @@
 package com.caqm.entity.finding
 
 import com.caqm.entity.BaseEntity
+import com.caqm.entity.dataitem.Department
+import com.caqm.entity.dataitem.RootAnalyze
+import com.caqm.entity.sys.User
 import jakarta.persistence.*
 import java.time.LocalDateTime
 
 @Entity
 @Table(name = "risk_analyze_evaluate")
 data class RiskAnalyzeEvaluate(
-    val findingName: String? = null,
-    val rootName: String? = null,
-    val riskRelatedDeptName: String? = null,
-    val dutyMan: String? = null,
-    val possibility: Int? = null,
-    val severity: Int? = null,
-    val riskValue: Int? = null,
-    val isSecure: Int? = null,
-    val eventDiscribe: String? = null,
-    val excuteDate: LocalDateTime? = null,
+    @OneToOne
+    @JoinColumn
+    val rootAnalyze: RootAnalyze? = null,
+    @OneToOne
+    @JoinColumn
+    val relatedDept: Department? = null,
+    @OneToOne
+    @JoinColumn
+    val dutyMan: User? = null,
+    /*
+     * 0:高
+     * 1:中
+     * 2:低*/
+    val possibility: Int,
+    /*
+     * 0:高
+     * 1:中
+     * 2:低*/
+    val severity: Int,
+    /*
+     * 0:高
+     * 1:中
+     * 2:低*/
+    val riskValue: Int,
+    /*
+     * 1:是
+     * 0:否*/
+    val isSecure: Int,
+    val eventDiscribe: String,
+    val excuteDate: LocalDateTime,
 ) : BaseEntity()
