@@ -11,7 +11,7 @@ data class File(
     val name: String,
     val status: Int,
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "parent_id")
     val parent: File? = null,
     val filePath: String,
 ) : BaseEntity()

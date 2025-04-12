@@ -10,6 +10,6 @@ import jakarta.persistence.*
 data class RootAnalyze(
     val name: String,
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "parent_id")
     val parent: RootAnalyze? = null,
 ) : BaseEntity()

@@ -17,26 +17,30 @@ import java.time.LocalDateTime
 @Table(name = "audit")
 data class Audit(
     val name: String,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val department: Department,
     val plannedStartDate: LocalDateTime,
     val plannedEndDate: LocalDateTime,
     val realStartDate: LocalDateTime,
     val realEndDate: LocalDateTime,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val airport: Airport,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val process: Process,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val mainAuditor: User,
-    @OneToMany
-    @JoinColumn
+    @ManyToMany
+    @JoinTable(
+        name = "audit_other_auditor",
+        joinColumns = [JoinColumn(name = "audit_id")],
+        inverseJoinColumns = [JoinColumn(name = "user_id")],
+    )
     val otherAuditors: MutableList<User>,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val auditMethod: AuditMethod,
     /*
@@ -46,15 +50,23 @@ data class Audit(
      * 3：待关闭
      * 4：已关闭*/
     val status: Int,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val closeUser: User,
     val remark: String,
-    @OneToMany
-    @JoinColumn
+    @ManyToMany
+    @JoinTable(
+        name = "audit_checklist",
+        joinColumns = [JoinColumn(name = "audit_id")],
+        inverseJoinColumns = [JoinColumn(name = "checklist_id")],
+    )
     val checklists: MutableList<Checklist>? = mutableListOf(),
-    @OneToMany
-    @JoinColumn
+    @ManyToMany
+    @JoinTable(
+        name = "audit_finding",
+        joinColumns = [JoinColumn(name = "audit_id")],
+        inverseJoinColumns = [JoinColumn(name = "finding_id")],
+    )
     val findings: MutableList<Finding>? = mutableListOf(),
     val summary: String,
 ) : BaseEntity()

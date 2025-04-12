@@ -12,13 +12,13 @@ import java.time.LocalDateTime
 @Entity
 @Table(name = "risk_analyze_evaluate")
 data class RiskAnalyzeEvaluate(
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val rootAnalyze: RootAnalyze? = null,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val relatedDept: Department? = null,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val dutyMan: User? = null,
     /*

@@ -12,3 +12,5 @@ spring:
     properties:
       hibernate:
         format_sql: true
+    hateoas:
+      use-hal-as-default-json-media-type: false

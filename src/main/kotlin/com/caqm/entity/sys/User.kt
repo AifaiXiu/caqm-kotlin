@@ -10,11 +10,10 @@ import jakarta.persistence.*
 // @ApiModel("用户实体类")
 data class User(
     val username: String,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val department: Department? = null,
     val email: String,
     var status: Int,
     val passwd: String,
-    val roleName: String,
 ) : BaseEntity()

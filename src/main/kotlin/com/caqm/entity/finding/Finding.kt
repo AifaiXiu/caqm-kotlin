@@ -14,37 +14,37 @@ import java.time.LocalDateTime
 @Entity
 @Table(name = "finding")
 data class Finding(
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val audit: Audit,
     /*
      * 1:开启
      * 0:关闭*/
     val status: Int,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val process: Process,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val airport: Airport,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val user: User,
     val targetCloseTime: LocalDateTime,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val closer: User,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
-    val detpt: Department,
-    @OneToOne
+    val dept: Department,
+    @ManyToOne
     @JoinColumn
     val findingType: FindingType,
     val evaluateResult: String,
-    @OneToOne
-    @JoinColumn
-    val measure: Measure,
-    @OneToOne
+    @OneToMany
+    @JoinColumn(name = "finding_id")
+    val measure: MutableList<Measure>? = mutableListOf(),
+    @ManyToOne
     @JoinColumn
     val riskAnalyzeEvaluate: RiskAnalyzeEvaluate,
 ) : BaseEntity()

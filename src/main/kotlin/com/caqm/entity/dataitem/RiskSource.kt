@@ -10,6 +10,6 @@ import jakarta.persistence.*
 data class RiskSource(
     val name: String,
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "parent_id")
     val parent: RiskSource? = null,
 ) : BaseEntity()

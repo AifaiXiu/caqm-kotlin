@@ -10,10 +10,10 @@ import java.time.LocalDateTime
 @Entity
 @Table(name = "measure")
 data class Measure(
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val dutyMan: User? = null,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val finisher: User? = null,
     val targetDate: LocalDateTime,

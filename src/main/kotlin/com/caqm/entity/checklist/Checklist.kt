@@ -11,15 +11,20 @@ import jakarta.persistence.*
 @Table(name = "checklist")
 data class Checklist(
     val name: String,
-    @OneToOne
+    @ManyToOne
     @JoinColumn
     val department: Department? = null,
     val status: Int,
     val remark: String,
-    @OneToMany
-    @JoinColumn
+    @ManyToMany
+    @JoinTable(
+        name = "checklist_file",
+        joinColumns = [JoinColumn(name = "checklist_id")],
+        inverseJoinColumns = [JoinColumn(name = "file_id")],
+    )
     val files: MutableList<File>? = mutableListOf(),
+    // 这里是将外键字段交给了checklistItem进行维护
     @OneToMany
-    @JoinColumn
+    @JoinColumn(name = "checklist_id")
     val checklistItems: MutableList<ChecklistItem>? = mutableListOf(),
 ) : BaseEntity()

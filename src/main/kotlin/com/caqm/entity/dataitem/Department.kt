@@ -10,6 +10,6 @@ import jakarta.persistence.*
 data class Department(
     val name: String,
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "parent_id")
     val parent: Department? = null,
 ) : BaseEntity()

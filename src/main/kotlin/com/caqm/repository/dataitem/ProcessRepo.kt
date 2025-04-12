@@ -1,4 +1,8 @@
 package com.caqm.repository.dataitem
 
-interface ProcessRepo {
-}
+import com.caqm.entity.dataitem.Process
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.web.bind.annotation.CrossOrigin
+
+@CrossOrigin
+interface ProcessRepo : JpaRepository<Process, Long>

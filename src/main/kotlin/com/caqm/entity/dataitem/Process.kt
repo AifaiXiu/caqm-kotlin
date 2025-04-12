@@ -10,6 +10,6 @@ import jakarta.persistence.*
 data class Process(
     val name: String,
     @ManyToOne
-    @JoinColumn
+    @JoinColumn(name = "parent_id")
     val parent: Process? = null,
 ) : BaseEntity()

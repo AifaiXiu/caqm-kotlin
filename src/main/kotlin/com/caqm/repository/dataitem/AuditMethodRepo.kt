@@ -1,4 +1,8 @@
 package com.caqm.repository.dataitem
 
-interface AuditMethondRepo {
-}
+import com.caqm.entity.dataitem.AuditMethod
+import org.springframework.data.jpa.repository.JpaRepository
+import org.springframework.web.bind.annotation.CrossOrigin
+
+@CrossOrigin
+interface AuditMethodRepo : JpaRepository<AuditMethod, Long>
